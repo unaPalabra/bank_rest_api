@@ -2,17 +2,12 @@ package org.example.repository;
 
 import org.example.model.Client;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
 
 public interface ClientRepository {
 
-    ArrayList<Client> getClients();
+    BigDecimal getBalance(Long client_id);
+   Client putMoneу (Long client_id,  BigDecimal sum);
+   Client takeMoney (Long client_id,  BigDecimal sum);
 
-   Client getClientById(Long client_id);
-
-    Client addClient(Client client);
-
-    Client updateClient(Long client_id, Client client);
-
-    void deleteClient(Long client_id);
 }

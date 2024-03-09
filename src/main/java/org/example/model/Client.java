@@ -27,7 +27,7 @@ public class Client {
     @Override
     public String toString() {
         return "Client{" +
-                ", client_id=" + client_id +
+                " client_id=" + client_id +
                 ", current_balance=" + current_balance +
                 '}';
     }
