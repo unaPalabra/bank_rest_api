@@ -14,15 +14,15 @@ The default database for testing is Postgres
 ```http
 GET /clients/{id} 
 ```
-- returns the balance by user id
+ returns the balance by user id
   
 ```http
 PUT /putMoney/{clientId}/{sum} 
 ```
-- replenishment of the user's balance for a specified amount
+ replenishment of the user's balance for a specified amount
   
 ```http
 PUT /takeMoney/{clientId}/{sum}
 ```
-- withdrawal of a specified amount from the user's balance
+ withdrawal of a specified amount from the user's balance
 
