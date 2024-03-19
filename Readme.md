@@ -7,6 +7,8 @@ This is REST API for banks that enables account holders to interact with their b
 ## Database
 The default database for testing is Postgres
 
+![database structure](https://github.com/unaPalabra/bank_rest_api/blob/master/bd1.PNG)
+
 ## Current functionality
 
 ```http
