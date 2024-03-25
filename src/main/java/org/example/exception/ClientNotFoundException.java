@@ -1,6 +1,6 @@
 package org.example.exception;
 
-public class ClientNotFoundException extends RuntimeException{
+public class ClientNotFoundException extends NullPointerException {
     private  final Long client_id;
     public ClientNotFoundException(Long client_id){
         this.client_id = client_id;
