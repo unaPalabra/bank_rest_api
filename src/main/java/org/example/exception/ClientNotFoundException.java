@@ -1,13 +1,17 @@
 package org.example.exception;
 
 public class ClientNotFoundException extends NullPointerException {
-    private  final Long client_id;
-    public ClientNotFoundException(Long client_id){
-        this.client_id = client_id;
+    private   Long id;
+    public ClientNotFoundException(Long id){
+        this.id = id;
+    }
+
+    public ClientNotFoundException() {
+
     }
 
     @Override
     public String getMessage() {
-        return "Client with id = " + client_id + " not found";
+        return "Client with id = " + id + " not found";
     }
 }
