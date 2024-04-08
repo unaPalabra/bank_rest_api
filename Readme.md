@@ -28,3 +28,12 @@ PUT /takeMoney/{clientId}/{sum}
 ```
  withdrawal of a specified amount from the client's client
 
+```http
+GET /listOperation/{id}
+```
+ getting the entire list of operations for a given id or for a selected time range (in JSON format)
+
+```http
+GET /transfer/{sender_id}/{recipient_id}
+```
+

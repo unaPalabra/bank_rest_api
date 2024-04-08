@@ -1,5 +1,6 @@
 package org.example.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.example.entity.Client;
 import org.example.entity.Operation;
 import org.example.exception.ClientInsufficientFunds;
@@ -62,7 +63,7 @@ public class ClientService {
         Operation operation = new Operation();
         operation.setClient(client);
         operation.setType_operation(2);
-        operation.setAmount(sum);
+        operation.setAmount(sum.negate());
         operation.setTime_operation(new Date());
         operationRepository.save(operation);
 
@@ -73,7 +74,7 @@ public class ClientService {
     }
 
     @Transactional
-    public  List<String> getOperationList(long id, Date beginDate, Date endDate) {
+    public  List<String> getOperationList(Long id, Date beginDate, Date endDate) {
         Client client = clientRepository.findById(id).orElseThrow(() -> new  ClientNotFoundException(id));
         List<String> result = new ArrayList<>();
 
@@ -86,14 +87,44 @@ public class ClientService {
             }
             return result;
         } else {
-            List<Operation> listRange =
-                    operationRepository.findOperationsByClientIdAndDateRange(client.getId(), beginDate, endDate);
+            List<Operation> listRange = operationRepository.findOperationsByClientIdAndDateRange(client.getId(), beginDate, endDate);
             for (Operation e : listRange) {
                 result.add("Amount: " + String.valueOf(e.getAmount()));
                 result.add("Type operation: " + String.valueOf(e.getType_operation()));
                 result.add("Time operation: " + String.valueOf(e.getTime_operation()));
             }
             return result;
+        }
+    }
+
+    @Transactional
+    public String transferMoney(Long sender_id, Long recipient_id, BigDecimal sum) {
+        Client sender = clientRepository.findById(sender_id).orElseThrow(() -> new  ClientNotFoundException(sender_id));
+        Client recipient = clientRepository.findById(recipient_id).orElseThrow(() -> new ClientNotFoundException(recipient_id));
+        if(sender.getBalance().compareTo(sum) >= 0) {
+            sender.setBalance(sender.getBalance().subtract(sum));
+            recipient.setBalance(recipient.getBalance().add(sum));
+            clientRepository.save(sender);
+            clientRepository.save(recipient);
+
+            //Save information about transfer money in database (table Operation)
+            Operation operation_sender = new Operation();
+            operation_sender.setClient(sender);
+            operation_sender.setType_operation(3);
+            operation_sender.setAmount(sum.negate());
+            operation_sender.setTime_operation(new Date());
+            operationRepository.save(operation_sender);
+
+            Operation operation_rec = new Operation();
+            operation_rec.setClient(recipient);
+            operation_rec.setType_operation(4);
+            operation_rec.setAmount(sum);
+            operation_rec.setTime_operation(new Date());
+            operationRepository.save(operation_rec);
+
+            return "Success";
+        }else {
+            return "Error the operation";
         }
     }
 

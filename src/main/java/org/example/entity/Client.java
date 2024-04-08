@@ -3,6 +3,7 @@ package org.example.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Getter
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Entity
 @Table(name = "CLIENT")
-public class Client {
+public class Client  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

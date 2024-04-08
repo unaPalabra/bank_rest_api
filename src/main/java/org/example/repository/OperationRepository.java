@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import org.example.entity.Operation;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,7 +14,9 @@ import java.util.List;
 public interface OperationRepository extends JpaRepository<Operation, Integer> {
     List<Operation> findOperationsByClientId(Long id);
 
-    @Query("SELECT b FROM Operation b WHERE b.client = :id AND b.time_operation >= :beginDate AND b.time_operation <= :endDate")
+    @Query("SELECT b FROM Operation b WHERE b.client.id = :id AND b.time_operation BETWEEN :beginDate AND  :endDate")
     List<Operation> findOperationsByClientIdAndDateRange(@Param("id") Long id, @Param("beginDate") Date beginDate, @Param("endDate") Date endDate);
+
+
 
 }

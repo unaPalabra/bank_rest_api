@@ -47,4 +47,14 @@ public class ClientsController {
         return ResponseEntity.status(HttpStatus.OK).body(clientService.getOperationList(id, beginDate, endDate));
     }
 
+    @Transactional
+    @GetMapping("/transfer/{sender_id}/{recipient_id}")
+    ResponseEntity transferMoneyById(
+            @PathVariable(value = "sender_id") Long sender_id,
+            @PathVariable(value = "recipient_id") Long recipient_id,
+            @RequestParam(value = "sum") BigDecimal sum) {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                clientService.transferMoney(sender_id, recipient_id, sum));
+    }
+
 }
