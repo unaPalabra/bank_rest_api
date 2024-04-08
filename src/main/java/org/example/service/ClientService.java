@@ -1,6 +1,5 @@
 package org.example.service;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.example.entity.Client;
 import org.example.entity.Operation;
 import org.example.exception.ClientInsufficientFunds;

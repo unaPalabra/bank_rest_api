@@ -4,7 +4,7 @@ create table operation
     client_id bigint references public.client(id) not null,
     type_operation integer,
     amount numeric(38, 2),
-    time_operation timestamp without time zone,
+    time_operation date,
     CONSTRAINT pk_operation PRIMARY KEY (id_operation)
 );
 

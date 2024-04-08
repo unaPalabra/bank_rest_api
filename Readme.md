@@ -36,4 +36,4 @@ GET /listOperation/{id}
 ```http
 GET /transfer/{sender_id}/{recipient_id}
 ```
-
+the function of transferring funds from one client to another

@@ -18,5 +18,4 @@ public interface OperationRepository extends JpaRepository<Operation, Integer> {
     List<Operation> findOperationsByClientIdAndDateRange(@Param("id") Long id, @Param("beginDate") Date beginDate, @Param("endDate") Date endDate);
 
 
-
 }
